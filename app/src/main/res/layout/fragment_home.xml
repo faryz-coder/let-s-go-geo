@@ -7,30 +7,20 @@
     android:padding="20dp"
     tools:context=".ui.home.HomeFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/announcement_board_1"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="170dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toTopOf="@+id/event_notification_panel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Annoucement Board" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toTopOf="parent"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+    </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/event_notification_panel"
@@ -40,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/announcement_board_1">
+        app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view">
 
         <LinearLayout
             android:layout_width="match_parent"

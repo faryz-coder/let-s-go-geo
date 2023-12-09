@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bmh.letsgogeonative.databinding.FragmentGalleryBinding
+import com.bmh.letsgogeonative.databinding.FragmentLearningMaterialBinding
 
 class LearningMaterialFragment : Fragment() {
 
-    private var _binding: FragmentGalleryBinding? = null
+    private var _binding: FragmentLearningMaterialBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,7 +25,7 @@ class LearningMaterialFragment : Fragment() {
         val learningMaterialViewModel =
             ViewModelProvider(this).get(LearningMaterialViewModel::class.java)
 
-        _binding = FragmentGalleryBinding.inflate(inflater, container, false)
+        _binding = FragmentLearningMaterialBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textGallery

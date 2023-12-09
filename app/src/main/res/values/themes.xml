@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.LetsGoGeoNative" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/ground_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -22,4 +22,13 @@
     <style name="Theme.LetsGoGeoNative.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.LetsGoGeoNative.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.ElevatedButton" parent="Widget.Material3.Button.ElevatedButton">
+        <item name="backgroundTint">@color/groundDark</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Theme.textInputFilledStyle" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/groundLight</item>
+    </style>
 </resources>

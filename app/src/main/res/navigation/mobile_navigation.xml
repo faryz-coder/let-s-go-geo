@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.bmh.letsgogeonative.ui.gallery.GalleryFragment"
+        android:name="com.bmh.letsgogeonative.ui.learning_material.LearningMaterialFragment"
         android:label="@string/menu_learning_material"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_learning_material" />
 
     <fragment
         android:id="@+id/nav_slideshow"

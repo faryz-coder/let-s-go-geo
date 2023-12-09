@@ -19,4 +19,5 @@
     <string name="log_in">LOG IN</string>
     <string name="sign_up">SIGN UP</string>
     <string name="or">Or</string>
+    <string name="sections">Sections</string>
 </resources>

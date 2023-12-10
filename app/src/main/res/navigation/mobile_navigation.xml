@@ -30,7 +30,7 @@
         android:id="@+id/listTopicFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.ListTopicFragment"
         android:label="ListTopicFragment"
-        tools:layout="@layout/fragment_list_topic" >
+        tools:layout="@layout/fragment_list_topic">
         <action
             android:id="@+id/action_listTopicFragment_to_topicContentFragment"
             app:destination="@id/topicContentFragment" />
@@ -40,4 +40,9 @@
         android:name="com.bmh.letsgogeonative.ui.list_topic.topic_content.TopicContentFragment"
         android:label="TopicContentFragment"
         tools:layout="@layout/fragment_topic_content" />
+    <fragment
+        android:id="@+id/userProfile"
+        android:name="com.bmh.letsgogeonative.ui.profile.UserProfile"
+        android:label="UserProfile"
+        tools:layout="@layout/fragment_user_profile" />
 </navigation>

@@ -18,7 +18,7 @@ class TopicContentFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTopicContentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

@@ -4,8 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bmh.letsgogeonative.databinding.RowTopicBinding
+import kotlin.reflect.KFunction1
 
-class TopicAdapter(private val sections: MutableList<Sections>) :
+class TopicAdapter(private val sections: MutableList<Sections>, val onSelection: KFunction1<Int, Unit>) :
     RecyclerView.Adapter<TopicAdapter.MyViewHolder>() {
 
     class MyViewHolder(val binding: RowTopicBinding): RecyclerView.ViewHolder(binding.root)
@@ -27,6 +28,10 @@ class TopicAdapter(private val sections: MutableList<Sections>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val btn_topic = holder.binding.btnTopic
         btn_topic.text = sections[position].topic
+
+        btn_topic.setOnClickListener {
+            onSelection(position)
+        }
     }
 
 }

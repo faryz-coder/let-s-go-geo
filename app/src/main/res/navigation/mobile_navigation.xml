@@ -15,7 +15,7 @@
         android:id="@+id/nav_gallery"
         android:name="com.bmh.letsgogeonative.ui.learning_material.LearningMaterialFragment"
         android:label="@string/menu_learning_material"
-        tools:layout="@layout/fragment_learning_material" >
+        tools:layout="@layout/fragment_learning_material">
         <action
             android:id="@+id/action_nav_gallery_to_listTopicFragment"
             app:destination="@id/listTopicFragment" />
@@ -30,5 +30,14 @@
         android:id="@+id/listTopicFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.ListTopicFragment"
         android:label="ListTopicFragment"
-        tools:layout="@layout/fragment_list_topic"/>
+        tools:layout="@layout/fragment_list_topic" >
+        <action
+            android:id="@+id/action_listTopicFragment_to_topicContentFragment"
+            app:destination="@id/topicContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/topicContentFragment"
+        android:name="com.bmh.letsgogeonative.ui.list_topic.topic_content.TopicContentFragment"
+        android:label="TopicContentFragment"
+        tools:layout="@layout/fragment_topic_content" />
 </navigation>

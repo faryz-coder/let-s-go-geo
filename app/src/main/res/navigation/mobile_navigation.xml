@@ -39,10 +39,19 @@
         android:id="@+id/topicContentFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.topic_content.TopicContentFragment"
         android:label="TopicContentFragment"
-        tools:layout="@layout/fragment_topic_content" />
+        tools:layout="@layout/fragment_topic_content" >
+        <action
+            android:id="@+id/action_topicContentFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userProfile"
         android:name="com.bmh.letsgogeonative.ui.profile.UserProfile"
         android:label="UserProfile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.bmh.letsgogeonative.ui.list_topic.quiz.QuizFragment"
+        android:label="QuizFragment"
+        tools:layout="@layout/fragment_quiz"/>
 </navigation>

@@ -4,28 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.bmh.letsgogeonative.databinding.SignInBinding
+import com.bmh.letsgogeonative.databinding.SignUpBinding
 
-class SignInActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var binding: SignInBinding
+class SignUpActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: SignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = SignInBinding.inflate(layoutInflater)
+        binding = SignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnSignup.setOnClickListener(this)
+        binding.btnSignIn.setOnClickListener(this)
     }
 
     override fun onClick(btn: View) {
-        when(btn.id) {
-            binding.btnSignup.id -> navigateToSignUp()
+        when (btn.id) {
+            binding.btnSignIn.id -> navigateToSignUp()
         }
     }
 
     private fun navigateToSignUp() {
-        val intent = Intent(this, SignUpActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         startActivity(intent)
     }
 }

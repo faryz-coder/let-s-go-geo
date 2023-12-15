@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "262206676765",
+    "project_id": "let-s-go-geo",
+    "storage_bucket": "let-s-go-geo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262206676765:android:418f7c5bc2d72774794bf4",
+        "android_client_info": {
+          "package_name": "com.bmh.letsgogeonative"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHoA4OSCoTHxP5mJabiVWS8j-L-Tag4lI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

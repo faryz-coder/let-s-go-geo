@@ -52,10 +52,10 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
 
     // Import the BoM for the Firebase platform
-    // No need to specify version if BoM is included
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-
+    // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

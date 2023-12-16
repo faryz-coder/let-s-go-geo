@@ -26,14 +26,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         binding = SignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Check If User Already Sign In
-        // Navigate to Main if true
-        if (auth.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
         // Handle Button Click
         binding.btnSignup.setOnClickListener(this)
         binding.btnSignin.setOnClickListener(this)
@@ -41,6 +33,17 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         // Handle Form
         binding.inputUsername.addOnEditTextAttachedListener(this)
         binding.inputPassword.addOnEditTextAttachedListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Check If User Already Sign In
+        // Navigate to Main if true
+        if (auth.currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     override fun onClick(btn: View) {

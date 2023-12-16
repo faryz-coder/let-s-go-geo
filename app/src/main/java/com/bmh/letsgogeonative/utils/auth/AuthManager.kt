@@ -5,10 +5,13 @@ import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 class AuthManager(activity: Activity) {
 
     private var auth: FirebaseAuth = Firebase.auth
+    private val db: FirebaseFirestore = Firebase.firestore
     private var activity: Activity
 
     init {
@@ -22,6 +25,7 @@ class AuthManager(activity: Activity) {
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     Log.d("Faris::AuthManager", "createUserWithEmail:success")
+                    createUserProfile(email)
                     onSuccess.invoke()
                 } else {
                     onFailed.invoke()
@@ -38,6 +42,19 @@ class AuthManager(activity: Activity) {
                 } else {
                     onFailed.invoke()
                 }
+            }
+    }
+
+    private fun createUserProfile(email: String) {
+        val data = hashMapOf(
+            "email" to email
+        )
+
+        db.collection("users").document(email)
+            .set(data)
+            .addOnSuccessListener {}
+            .addOnFailureListener {
+                Log.w("Faris", "createUserProfile:failed:", it)
             }
     }
 }

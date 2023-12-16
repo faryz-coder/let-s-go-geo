@@ -1,6 +1,8 @@
 package com.bmh.letsgogeonative
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
@@ -12,12 +14,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bmh.letsgogeonative.databinding.ActivityMainBinding
+import com.bmh.letsgogeonative.ui.login.SignInActivity
+import com.bmh.letsgogeonative.viewModel.LoginViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +37,18 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        loginViewModel.currentUser.observe(this) {
+            Log.d("Faris", "IsUserLogin:: ${it != null}")
+            if (it == null) {
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
+
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)

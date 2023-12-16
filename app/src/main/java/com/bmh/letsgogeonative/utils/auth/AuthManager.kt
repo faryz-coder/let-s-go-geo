@@ -29,4 +29,15 @@ class AuthManager(activity: Activity) {
                 }
             }
     }
+
+    fun signInUser(email: String, password: String, onSuccess: () -> Unit, onFailed: () -> Unit) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(activity) { task ->
+                if (task.isSuccessful) {
+                    onSuccess.invoke()
+                } else {
+                    onFailed.invoke()
+                }
+            }
+    }
 }

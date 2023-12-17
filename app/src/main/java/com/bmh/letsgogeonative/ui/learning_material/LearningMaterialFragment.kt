@@ -26,16 +26,10 @@ class LearningMaterialFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val learningMaterialViewModel =
-            ViewModelProvider(this).get(LearningMaterialViewModel::class.java)
 
         _binding = FragmentLearningMaterialBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textGallery
-        learningMaterialViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

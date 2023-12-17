@@ -33,11 +33,6 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-
         val event = mutableListOf<Event>()
         for (i in 0..3) {
             event.add(Event("any", "https://orig00.deviantart.net/f107/f/2015/213/8/a/android_material_design_app_concept_by_higorsm25-d93r0yw.jpg"))

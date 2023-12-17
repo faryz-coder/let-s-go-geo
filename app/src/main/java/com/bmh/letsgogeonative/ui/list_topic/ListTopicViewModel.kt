@@ -15,8 +15,11 @@ class ListTopicViewModel: ViewModel() {
 
     private val _topicContent = MutableLiveData<MutableList<Constant.TopicContent>>()
 
+    private var _setsQuestion = MutableLiveData<Constant.Question>()
+
     val section: LiveData<MutableList<Sections>> = _section
     val topicContent: LiveData<MutableList<Constant.TopicContent>> = _topicContent
+    val setsQuestion: LiveData<Constant.Question> = _setsQuestion
 
     var topicSelected: String = ""
     var sectionSelected: String = ""
@@ -29,5 +32,9 @@ class ListTopicViewModel: ViewModel() {
     fun setTopicContent(item: MutableList<Constant.TopicContent>) {
         _topicContent.value?.clear()
         _topicContent.value = item
+    }
+
+    fun setQuestion(item: Constant.Question) {
+        _setsQuestion.value = item
     }
 }

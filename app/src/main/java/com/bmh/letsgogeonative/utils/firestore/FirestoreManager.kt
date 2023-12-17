@@ -80,4 +80,43 @@ class FirestoreManager {
                 Log.w("Faris", "getTopicContent:failed:$it")
             }
     }
+
+    fun getQuestion(listTopicViewModel: ListTopicViewModel) {
+        val docRef = db.collection(listTopicViewModel.sectionSelected)
+            .document(listTopicViewModel.topicSelected)
+            .collection("question")
+
+
+        val listQuestion = emptyList<String>().toMutableList()
+        val listOption = emptyList<List<String>>().toMutableList()
+        val listAnswer = emptyList<Long>().toMutableList()
+
+        docRef.get()
+            .addOnSuccessListener { documents ->
+
+                for (doc in documents) {
+                    doc.get("option")
+                    Log.d("getQuestion", "${(doc.get("option") as List<*>).get(0)}")
+                }
+
+                documents.map {
+                    val question = it.getField<String>("question").toString()
+                    val option = it.get("option") as List<String>
+                    val answer = it.get("answer") as Long
+
+                    listQuestion.add(question)
+                    listOption.add(option)
+                    listAnswer.add(answer)
+                }.let {
+                    listTopicViewModel.setQuestion(
+                        Constant.Question(
+                            listQuestion,
+                            listOption,
+                            listAnswer
+                        )
+                    )
+                }
+
+            }
+    }
 }

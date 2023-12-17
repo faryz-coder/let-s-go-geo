@@ -5,4 +5,10 @@ class Constant {
         val title : String,
         val noteUrl: String
     )
+
+    data class Question (
+        var question: List<String>,
+        val option: List<List<String>>,
+        val answer: List<Long>
+    )
 }

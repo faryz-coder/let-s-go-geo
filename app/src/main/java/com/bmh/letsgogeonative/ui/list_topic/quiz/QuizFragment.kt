@@ -10,12 +10,16 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bmh.letsgogeonative.R
 import com.bmh.letsgogeonative.databinding.FragmentQuizBinding
 import com.bmh.letsgogeonative.model.Constant
 import com.bmh.letsgogeonative.ui.list_topic.ListTopicViewModel
 import com.bmh.letsgogeonative.utils.firestore.FirestoreManager
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     private var _binding: FragmentQuizBinding? = null
@@ -108,8 +112,11 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
         // Proceed to Next Question OR End The Quiz
         if (index + 1 == total) {
             d("QuizFragment", "Complete")
-            findNavController().popBackStack(R.id.nav_gallery, false)
             FirestoreManager().submitResult(listTopicViewModel)
+            lifecycleScope.launch {
+                delay(1000L)
+                findNavController().popBackStack(R.id.nav_gallery, false)
+            }
         } else {
             index += 1
             nextQuestion()

@@ -23,6 +23,7 @@ class ListTopicViewModel: ViewModel() {
 
     var topicSelected: String = ""
     var sectionSelected: String = ""
+    var marks = 0
 
     fun setList(item: MutableList<Sections>) {
         _section.value?.clear()

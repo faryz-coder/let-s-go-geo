@@ -119,4 +119,22 @@ class FirestoreManager {
 
             }
     }
+
+    fun submitResult(listTopicViewModel: ListTopicViewModel) {
+        val data = hashMapOf(
+            "section" to listTopicViewModel.sectionSelected,
+            "result" to listTopicViewModel.marks,
+            "topic" to listTopicViewModel.topicSelected,
+            "totalQuestion" to listTopicViewModel.setsQuestion.value!!.question.size
+        )
+
+        db.collection("users")
+            .document(auth.currentUser?.email.toString())
+            .collection("result")
+            .document("lower")
+            .collection("lower")
+            .add(data)
+            .addOnSuccessListener {  }
+            .addOnFailureListener {  }
+    }
 }

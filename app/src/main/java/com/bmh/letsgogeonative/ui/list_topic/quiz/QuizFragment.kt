@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -66,6 +68,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
     override fun onClick(btn: View) {
         when (btn.id) {
             binding.btnContinueOrComplete.id -> {
+                binding.btnContinueOrComplete.isEnabled = false
                checkAnswer()
             }
         }
@@ -83,14 +86,20 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
         binding.answerA.isChecked = true
 
         total = question.question.size
+
+        binding.overlayResult.isGone = true
+        binding.btnContinueOrComplete.isEnabled = true
     }
 
     private fun checkAnswer() {
         if (selectedAnswer == question.answer[index]) {
             d("QuizFragment", "Correct")
+            listTopicViewModel.marks += 1
+            showChoiceResult(true)
             proceed()
         } else {
             d("QuizFragment", "Wrong")
+            showChoiceResult(false)
             proceed()
         }
     }
@@ -100,9 +109,19 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
         if (index + 1 == total) {
             d("QuizFragment", "Complete")
             findNavController().popBackStack(R.id.nav_gallery, false)
+            FirestoreManager().submitResult(listTopicViewModel)
         } else {
             index += 1
             nextQuestion()
+        }
+    }
+
+    private fun showChoiceResult(result: Boolean) {
+        binding.overlayResult.isGone = false
+        if (result) {
+            binding.imgResult.setImageResource(R.drawable.rounded_done_24)
+        } else {
+            binding.imgResult.setImageResource(R.drawable.rounded_close_24)
         }
     }
 }

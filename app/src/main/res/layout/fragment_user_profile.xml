@@ -11,6 +11,7 @@
         android:id="@+id/materialCardView3"
         android:layout_width="130dp"
         android:layout_height="130dp"
+        android:background="@drawable/board"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,12 +56,21 @@
 
     <Button
         android:id="@+id/btn_save"
-        style="@style/Theme.ElevatedButton"
+        style="@style/Theme.CustomButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <ImageButton
+        android:id="@+id/btn_profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:backgroundTint="#00FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView3"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView3"
+        app:srcCompat="@drawable/rounded_change_circle_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

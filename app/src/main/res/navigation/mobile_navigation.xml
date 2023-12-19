@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/listTopicFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.ListTopicFragment"
-        android:label="ListTopicFragment"
+        android:label="List Topic"
         tools:layout="@layout/fragment_list_topic">
         <action
             android:id="@+id/action_listTopicFragment_to_topicContentFragment"
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/topicContentFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.topic_content.TopicContentFragment"
-        android:label="TopicContentFragment"
+        android:label="Content"
         tools:layout="@layout/fragment_topic_content" >
         <action
             android:id="@+id/action_topicContentFragment_to_quizFragment"
@@ -47,11 +47,11 @@
     <fragment
         android:id="@+id/userProfile"
         android:name="com.bmh.letsgogeonative.ui.profile.UserProfile"
-        android:label="UserProfile"
+        android:label="Profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.bmh.letsgogeonative.ui.list_topic.quiz.QuizFragment"
-        android:label="QuizFragment"
+        android:label="Quiz"
         tools:layout="@layout/fragment_quiz"/>
 </navigation>

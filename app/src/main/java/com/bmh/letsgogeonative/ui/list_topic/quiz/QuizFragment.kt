@@ -126,9 +126,9 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
     private fun showChoiceResult(result: Boolean) {
         binding.overlayResult.isGone = false
         if (result) {
-            binding.imgResult.setImageResource(R.drawable.rounded_done_24)
+            binding.imgResult.setImageResource(R.drawable.correct)
         } else {
-            binding.imgResult.setImageResource(R.drawable.rounded_close_24)
+            binding.imgResult.setImageResource(R.drawable.wrong)
         }
     }
 }

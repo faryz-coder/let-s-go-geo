@@ -16,4 +16,9 @@ class Constant {
         val imgUrl: String,
         val dateTime: String
     )
+
+    data class User (
+        var email: String,
+        var image: String
+    )
 }

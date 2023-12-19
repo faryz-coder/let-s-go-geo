@@ -57,4 +57,8 @@ class AuthManager(activity: Activity) {
                 Log.w("Faris", "createUserProfile:failed:", it)
             }
     }
+
+    fun logout() {
+        auth.signOut()
+    }
 }

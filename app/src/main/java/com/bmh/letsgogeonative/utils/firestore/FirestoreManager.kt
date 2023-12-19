@@ -17,13 +17,14 @@ class FirestoreManager {
     private val db: FirebaseFirestore = Firebase.firestore
     private val auth: FirebaseAuth = Firebase.auth
 
-    fun userProfile(setProfile: (String, String) -> Unit) {
+    fun userProfile(setProfile: (String, String, String) -> Unit) {
         val docRef = db.collection("users").document(auth.currentUser?.email.toString())
         docRef.get()
             .addOnSuccessListener { document ->
                 setProfile(
                     document.getField<String>("email").toString(),
-                    document.getField<String>("name") ?: ""
+                    document.getField<String>("name") ?: "",
+                    document.getField<String>("image") ?: ""
                 )
             }
     }
@@ -37,8 +38,21 @@ class FirestoreManager {
             .set(data, SetOptions.merge())
             .addOnCompleteListener { }
             .addOnFailureListener {
-                Log.w("Faris", "updateProfile:failed:", it)
+                Log.w("FirestoreManager", "updateProfile:failed:", it)
             }
+    }
+
+    fun updateProfileImage(downloadUrl: String) {
+        val data = hashMapOf(
+            "image" to downloadUrl
+        )
+        db.collection("users").document(auth.currentUser?.email.toString())
+            .set(data, SetOptions.merge())
+            .addOnCompleteListener { }
+            .addOnFailureListener {
+                Log.w("FirestoreManager", "updateProfile:failed:", it)
+            }
+
     }
 
     fun getListTopic(selection: String, listTopicViewModel: ListTopicViewModel) {
@@ -53,7 +67,7 @@ class FirestoreManager {
                         )
                     )
                 }
-                Log.d("Faris", "size :: ${document.size()}")
+                Log.d("FirestoreManager", "size :: ${document.size()}")
                 listTopicViewModel.setList(sections)
             }
     }
@@ -65,7 +79,7 @@ class FirestoreManager {
 
         docRef.get()
             .addOnSuccessListener { docs ->
-                Log.d("Faris", "getTopicContent:success")
+                Log.d("FirestoreManager", "getTopicContent:success")
 
                 content.add(
                     Constant.TopicContent(
@@ -74,10 +88,10 @@ class FirestoreManager {
                     )
                 )
                 listTopicViewModel.setTopicContent(content)
-                Log.d("Faris", "getTopicContent: ${content.size}, ${content.size}")
+                Log.d("FirestoreManager", "getTopicContent: ${content.size}, ${content.size}")
             }
             .addOnFailureListener {
-                Log.w("Faris", "getTopicContent:failed:$it")
+                Log.w("FirestoreManager", "getTopicContent:failed:$it")
             }
     }
 
@@ -152,7 +166,7 @@ class FirestoreManager {
                         )
                     )
                 }
-                Log.d("Faris", "size :: ${document.size()}")
+                Log.d("FirestoreManager", "size :: ${document.size()}")
                 homeViewModel.setEvent(event)
             }
     }
@@ -171,7 +185,7 @@ class FirestoreManager {
                         )
                     )
                 }
-                Log.d("Faris", "size :: ${document.size()}")
+                Log.d("FirestoreManager", "size :: ${document.size()}")
                 homeViewModel.setAnnouncement(event)
             }
     }

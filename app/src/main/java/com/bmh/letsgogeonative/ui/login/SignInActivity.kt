@@ -29,6 +29,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         // Handle Button Click
         binding.btnSignup.setOnClickListener(this)
         binding.btnSignin.setOnClickListener(this)
+        binding.signInLayout.setOnClickListener(this)
 
         // Handle Form
         binding.inputUsername.addOnEditTextAttachedListener(this)
@@ -50,6 +51,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         when (btn.id) {
             binding.btnSignup.id -> navigateToSignUp()
             binding.btnSignin.id -> initSignIn()
+            binding.signInLayout.id -> hideKeyboard(this, currentFocus)
         }
     }
 

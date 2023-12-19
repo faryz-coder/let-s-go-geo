@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.bmh.letsgogeonative.model.Constant
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 
 class LoginViewModel : ViewModel() {
@@ -17,8 +16,10 @@ class LoginViewModel : ViewModel() {
 
     val currentUser: LiveData<Constant.User> = _currentUser
 
+    var email = ""
     init {
         _currentUser.value?.email = auth.currentUser?.email.toString()
+        email = auth.currentUser?.email.toString()
     }
 
     fun setProfileImage(image: String) {

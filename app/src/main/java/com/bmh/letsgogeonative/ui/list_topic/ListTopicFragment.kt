@@ -41,8 +41,7 @@ class ListTopicFragment : Fragment(), OnSelection {
             adapter = topicAdapter
         }
 
-        listTopicViewModel.sectionSelected = "lower"
-        FirestoreManager().getListTopic("lower", listTopicViewModel)
+        FirestoreManager().getListTopic(listTopicViewModel.sectionSelected, listTopicViewModel)
 
         listTopicViewModel.section.observe(viewLifecycleOwner) {
             sections.clear()

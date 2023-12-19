@@ -21,4 +21,11 @@ class Constant {
         var email: String,
         var image: String
     )
+
+    data class Score (
+        val result: Long,
+        val section: String,
+        val topic: String,
+        val totalQuestion: Long
+    )
 }

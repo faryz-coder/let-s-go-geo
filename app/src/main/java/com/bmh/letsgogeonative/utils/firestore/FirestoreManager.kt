@@ -189,4 +189,28 @@ class FirestoreManager {
                 homeViewModel.setAnnouncement(event)
             }
     }
+
+    fun getResult(section: String, setScore: (MutableList<Constant.Score>) -> Unit) {
+        val docRef = db.collection("users")
+            .document(auth.currentUser?.email.toString())
+            .collection("result")
+            .document(section)
+            .collection("list")
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val score = mutableListOf<Constant.Score>()
+
+                document.map {
+                    score.add(Constant.Score(
+                        it.getField<Long>("result")!!,
+                        it.getField<String>("section")!!,
+                        it.getField<String>("topic")!!,
+                        it.getField<Long>("totalQuestion")!!
+
+                    ))
+                }
+                setScore.invoke(score)
+            }
+    }
 }

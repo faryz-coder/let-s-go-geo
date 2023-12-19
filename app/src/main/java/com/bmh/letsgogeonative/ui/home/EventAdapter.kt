@@ -4,9 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bmh.letsgogeonative.databinding.CarouselLayoutBinding
+import com.bmh.letsgogeonative.model.Constant
 import com.squareup.picasso.Picasso
 
-class EventAdapter(private val event: MutableList<Event>) :
+class EventAdapter(private val event: MutableList<Constant.Event>) :
     RecyclerView.Adapter<EventAdapter.MyViewHolder>() {
     class MyViewHolder(val binding: CarouselLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -26,7 +27,7 @@ class EventAdapter(private val event: MutableList<Event>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val imageView = holder.binding.carouselImageView
-        val imageUrl = event[position].imageUrl
+        val imageUrl = event[position].imgUrl
         Picasso.get().load(imageUrl).into(imageView)
     }
 }

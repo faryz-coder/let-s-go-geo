@@ -28,7 +28,7 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/event_notification_panel"
+        app:layout_constraintBottom_toTopOf="@+id/carousel_recycler_view2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,13 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="Event Notification Panel"
+        android:text="Event"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/event_notification_panel"
+        app:layout_constraintStart_toStartOf="@+id/carousel_recycler_view2"
         app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/event_notification_panel"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_recycler_view2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -60,13 +60,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carousel_recycler_view">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

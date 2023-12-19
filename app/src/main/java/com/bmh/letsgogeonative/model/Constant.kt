@@ -11,4 +11,9 @@ class Constant {
         val option: List<List<String>>,
         val answer: List<Long>
     )
+
+    data class Event (
+        val imgUrl: String,
+        val dateTime: String
+    )
 }

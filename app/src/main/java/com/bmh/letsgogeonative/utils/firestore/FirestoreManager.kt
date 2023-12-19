@@ -1,8 +1,8 @@
 package com.bmh.letsgogeonative.utils.firestore
 
-import android.adservices.topics.Topic
 import android.util.Log
 import com.bmh.letsgogeonative.model.Constant
+import com.bmh.letsgogeonative.ui.home.HomeViewModel
 import com.bmh.letsgogeonative.ui.list_topic.Sections
 import com.bmh.letsgogeonative.ui.list_topic.ListTopicViewModel
 import com.google.firebase.Firebase
@@ -134,7 +134,45 @@ class FirestoreManager {
             .document("lower")
             .collection("lower")
             .add(data)
-            .addOnSuccessListener {  }
-            .addOnFailureListener {  }
+            .addOnSuccessListener { }
+            .addOnFailureListener { }
+    }
+
+    fun getListEvent(homeViewModel: HomeViewModel) {
+        val docRef = db.collection("event")
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val event = mutableListOf<Constant.Event>()
+                document.map {
+                    event.add(
+                        Constant.Event(
+                            it.getField<String>("imgUrl").toString(),
+                            it.getField<String>("dateTime").toString()
+                        )
+                    )
+                }
+                Log.d("Faris", "size :: ${document.size()}")
+                homeViewModel.setEvent(event)
+            }
+    }
+
+    fun getListAnnouncement(homeViewModel: HomeViewModel) {
+        val docRef = db.collection("annoucement")
+
+        docRef.get()
+            .addOnSuccessListener { document ->
+                val event = mutableListOf<Constant.Event>()
+                document.map {
+                    event.add(
+                        Constant.Event(
+                            it.getField<String>("imgUrl").toString(),
+                            it.getField<String>("dateTime").toString()
+                        )
+                    )
+                }
+                Log.d("Faris", "size :: ${document.size()}")
+                homeViewModel.setAnnouncement(event)
+            }
     }
 }

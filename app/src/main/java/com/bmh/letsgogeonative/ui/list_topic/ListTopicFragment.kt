@@ -51,8 +51,6 @@ class ListTopicFragment : Fragment(), OnSelection {
             Log.d("Faris", "listTopicViewModel :: $it")
         }
 
-
-
         return root
     }
 

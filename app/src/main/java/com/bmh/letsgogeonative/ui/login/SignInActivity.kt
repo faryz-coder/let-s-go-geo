@@ -4,16 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isNotEmpty
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.bmh.letsgogeonative.MainActivity
+import com.bmh.letsgogeonative.R
+import com.bmh.letsgogeonative.databinding.DialogForgotPasswordBinding
 import com.bmh.letsgogeonative.databinding.SignInBinding
 import com.bmh.letsgogeonative.utils.auth.AuthManager
 import com.bmh.letsgogeonative.utils.util.UtilsInterface
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.runBlocking
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface,
     TextInputLayout.OnEditTextAttachedListener {
@@ -30,6 +37,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         binding.btnSignup.setOnClickListener(this)
         binding.btnSignin.setOnClickListener(this)
         binding.signInLayout.setOnClickListener(this)
+        binding.btnForgotPassword.setOnClickListener(this)
 
         // Handle Form
         binding.inputUsername.addOnEditTextAttachedListener(this)
@@ -52,7 +60,42 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
             binding.btnSignup.id -> navigateToSignUp()
             binding.btnSignin.id -> initSignIn()
             binding.signInLayout.id -> hideKeyboard(this, currentFocus)
+            binding.btnForgotPassword.id -> dialogForgotPassword().show()
         }
+    }
+
+    private fun dialogForgotPassword(): BottomSheetDialog {
+        val bottomSheetDialog = BottomSheetDialog(this)
+        val dialogForgotPasswordBinding = DialogForgotPasswordBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(dialogForgotPasswordBinding.root)
+
+        dialogForgotPasswordBinding.btnReset.setOnClickListener {
+            if (dialogForgotPasswordBinding.inputEmail.isNotEmpty()) {
+                val email = dialogForgotPasswordBinding.inputEmail.editText?.text
+                dialogForgotPasswordBinding.btnReset.isEnabled = false
+                dialogForgotPasswordBinding.inputEmail.isEnabled = false
+
+                dialogForgotPasswordBinding.loadingLayout.isGone = false
+                hideKeyboard(this, dialogForgotPasswordBinding.root.findFocus())
+
+                dialogForgotPasswordBinding.progressResult.setOnClickListener {
+                    bottomSheetDialog.dismiss()
+                }
+
+                auth.sendPasswordResetEmail(email.toString())
+                    .addOnSuccessListener {
+                        dialogForgotPasswordBinding.progressResult.isVisible = true
+                        dialogForgotPasswordBinding.progressResult.setImageResource(R.drawable.correct)
+
+                        dialogForgotPasswordBinding.progressBar.isVisible = false
+                    }
+                    .addOnFailureListener {
+                        dialogForgotPasswordBinding.progressResult.setImageResource(R.drawable.wrong)
+                    }
+            }
+        }
+
+        return bottomSheetDialog
     }
 
     /**

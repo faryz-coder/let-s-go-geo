@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = it.email
         }
 
 

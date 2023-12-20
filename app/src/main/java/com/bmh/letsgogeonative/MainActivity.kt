@@ -73,7 +73,9 @@ class MainActivity : AppCompatActivity() {
     private fun displayProfile(email: String, name: String, image: String) {
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = email
         val imgView = binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.imageView)
-        Picasso.get().load(image).into(imgView)
+        if (image.isNotEmpty()) {
+            Picasso.get().load(image).into(imgView)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

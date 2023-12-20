@@ -28,6 +28,9 @@ class EventAdapter(private val event: MutableList<Constant.Event>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val imageView = holder.binding.carouselImageView
         val imageUrl = event[position].imgUrl
-        Picasso.get().load(imageUrl).into(imageView)
+        if (imageUrl.isNotEmpty()) {
+            Picasso.get().load(imageUrl).into(imageView)
+
+        }
     }
 }

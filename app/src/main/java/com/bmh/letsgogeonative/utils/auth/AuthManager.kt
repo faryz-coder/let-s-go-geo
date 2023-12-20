@@ -26,6 +26,7 @@ class AuthManager(activity: Activity) {
                 if (task.isSuccessful) {
                     Log.d("Faris::AuthManager", "createUserWithEmail:success")
                     createUserProfile(email)
+                    auth.signOut()
                     onSuccess.invoke()
                 } else {
                     onFailed.invoke()

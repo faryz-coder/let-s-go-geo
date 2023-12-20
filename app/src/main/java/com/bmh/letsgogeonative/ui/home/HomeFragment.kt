@@ -18,6 +18,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private lateinit var eventAdapter: EventAdapter
     private lateinit var announcementAdapter: EventAdapter
+    private lateinit var homeViewModel: HomeViewModel
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,8 +29,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel =
+            ViewModelProvider(requireActivity())[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -37,20 +38,8 @@ class HomeFragment : Fragment() {
         val event = mutableListOf<Constant.Event>()
         val announcement = mutableListOf<Constant.Event>()
 
-        FirestoreManager().getListEvent(homeViewModel)
-        FirestoreManager().getListAnnouncement(homeViewModel)
         eventAdapter = EventAdapter(event)
         announcementAdapter = EventAdapter(announcement)
-
-        // Initiate recycler view
-        binding.carouselRecyclerView.apply {
-            layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
-            adapter = eventAdapter
-        }
-        binding.carouselRecyclerView2.apply {
-            layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
-            adapter = announcementAdapter
-        }
 
         val snapHelper = CarouselSnapHelper()
         snapHelper.attachToRecyclerView(binding.carouselRecyclerView)
@@ -60,16 +49,30 @@ class HomeFragment : Fragment() {
         homeViewModel.event.observe(viewLifecycleOwner) {
             event.clear()
             event.addAll(it)
-            eventAdapter.notifyDataSetChanged()
+            // Initiate recycler view
+            binding.carouselRecyclerView.apply {
+                layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
+                adapter = eventAdapter
+            }
         }
 
         homeViewModel.announcement.observe(viewLifecycleOwner) {
             announcement.clear()
             announcement.addAll(it)
-            announcementAdapter.notifyDataSetChanged()
+            // Initiate recycler view
+            binding.carouselRecyclerView2.apply {
+                layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
+                adapter = announcementAdapter
+            }
         }
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        FirestoreManager().getListEvent(homeViewModel)
+        FirestoreManager().getListAnnouncement(homeViewModel)
     }
 
     override fun onDestroyView() {

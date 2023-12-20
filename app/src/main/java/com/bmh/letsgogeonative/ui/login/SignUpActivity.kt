@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.bmh.letsgogeonative.databinding.SignUpBinding
 import com.bmh.letsgogeonative.utils.auth.AuthManager
@@ -39,6 +40,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         when (btn.id) {
             binding.btnSignIn.id -> navigateToSignUp()
             binding.btnSignUp.id -> {
+                binding.btnSignUp.isEnabled = false
+                hideKeyboard(this, binding.root.findFocus())
                 runBlocking {
                     createUser()
                 }
@@ -57,8 +60,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      */
     private fun createUser() {
         if (
-            binding.suPassword.editText?.text == binding.suConfirmPassword.editText?.text
+            binding.suPassword.editText?.text.toString() == binding.suConfirmPassword.editText?.text.toString()
         ) {
+            binding.progressBarSignup.isVisible = true
             AuthManager(this)
                 .createUser(
                     email = binding.suEmail.editText?.text.toString(),
@@ -68,6 +72,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
                 )
         } else {
             Snackbar.make(binding.root, "Password Is Not Same", Snackbar.LENGTH_SHORT).show()
+            binding.progressBarSignup.isVisible = false
+            binding.btnSignUp.isEnabled = true
         }
     }
 
@@ -76,6 +82,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      */
     private fun onSuccess() {
         Snackbar.make(binding.root, "Success", Snackbar.LENGTH_SHORT).show()
+        binding.progressBarSignup.isVisible = false
+        binding.btnSignUp.isEnabled = true
     }
 
     /***
@@ -83,6 +91,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      */
     private fun onFailed() {
         Snackbar.make(binding.root, "Failed", Snackbar.LENGTH_SHORT).show()
+        binding.progressBarSignup.isVisible = false
+        binding.btnSignUp.isEnabled = true
     }
 
     /***

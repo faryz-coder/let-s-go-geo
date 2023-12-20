@@ -82,7 +82,9 @@ class PerformanceFragment : Fragment() {
 
     private fun displayProfile(email: String, name: String, image: String) {
         binding.textView6.text = email
-        Picasso.get().load(image).into(binding.imageProfile)
+        if (image.isNotEmpty()) {
+            Picasso.get().load(image).into(binding.imageProfile)
+        }
     }
 
     override fun onDestroyView() {

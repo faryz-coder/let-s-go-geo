@@ -41,6 +41,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
                     createUser()
                 }
             }
+
             binding.signUpLayout.id -> {
                 hideKeyboard(this, currentFocus)
             }
@@ -53,13 +54,19 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      * True = Success
      */
     private fun createUser() {
-        AuthManager(this)
-            .createUser(
-                email = binding.suEmail.editText?.text.toString(),
-                password = binding.suPassword.editText?.text.toString(),
-                onSuccess = { onSuccess() },
-                onFailed = { onFailed() }
-            )
+        if (
+            binding.suPassword.editText?.text == binding.suConfirmPassword.editText?.text
+        ) {
+            AuthManager(this)
+                .createUser(
+                    email = binding.suEmail.editText?.text.toString(),
+                    password = binding.suPassword.editText?.text.toString(),
+                    onSuccess = { onSuccess() },
+                    onFailed = { onFailed() }
+                )
+        } else {
+            Snackbar.make(binding.root, "Password Is Not Same", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     /***

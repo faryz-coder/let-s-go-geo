@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.doOnTextChanged
 import com.bmh.letsgogeonative.databinding.SignUpBinding
 import com.bmh.letsgogeonative.utils.auth.AuthManager
@@ -20,6 +21,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         super.onCreate(savedInstanceState)
 
         binding = SignUpBinding.inflate(layoutInflater)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
 
         // Handle Button Click

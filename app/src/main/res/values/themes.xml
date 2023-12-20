@@ -43,7 +43,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Theme.textInputFilledStyle" parent="Widget.Material3.TextInputLayout.FilledBox">
+    <style name="Theme.textInputFilledStyle" parent="Theme.LetsGoGeoNative">
         <item name="boxBackgroundColor">@color/groundLight</item>
     </style>
 

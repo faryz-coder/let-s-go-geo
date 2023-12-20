@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
 import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
@@ -31,6 +32,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         super.onCreate(savedInstanceState)
 
         binding = SignInBinding.inflate(layoutInflater)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
 
         // Handle Button Click

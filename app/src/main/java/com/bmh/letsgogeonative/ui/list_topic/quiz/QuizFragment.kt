@@ -1,5 +1,6 @@
 package com.bmh.letsgogeonative.ui.list_topic.quiz
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log.d
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
     private var total = 0
     private lateinit var question: Constant.Question
     private var selectedAnswer = 0L
+    private lateinit var mediaPlayer: MediaPlayer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
         val root: View = binding.root
         listTopicViewModel = ViewModelProvider(requireActivity())[ListTopicViewModel::class.java]
 
+        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.click)
         binding.radioGroup.setOnCheckedChangeListener(this)
         binding.btnContinueOrComplete.setOnClickListener(this)
 
@@ -72,6 +75,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
     override fun onClick(btn: View) {
         when (btn.id) {
             binding.btnContinueOrComplete.id -> {
+                playSound()
                 binding.btnContinueOrComplete.isEnabled = false
                checkAnswer()
             }
@@ -130,5 +134,19 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
         } else {
             binding.imgResult.setImageResource(R.drawable.wrong)
         }
+    }
+
+    private fun playSound() {
+        if (mediaPlayer.isPlaying) {
+            mediaPlayer.stop()
+            mediaPlayer.start()
+        } else {
+            mediaPlayer.start()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
     }
 }

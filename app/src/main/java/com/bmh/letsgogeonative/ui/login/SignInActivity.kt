@@ -112,13 +112,15 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      * True = Success
      */
     private fun initSignIn() {
-        AuthManager(this)
-            .signInUser(
-                email = binding.inputUsername.editText?.text.toString(),
-                password = binding.inputPassword.editText?.text.toString(),
-                onSuccess = { onSuccess() },
-                onFailed = { onFailed() }
-            )
+        if (binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
+            AuthManager(this)
+                .signInUser(
+                    email = binding.inputUsername.editText?.text.toString(),
+                    password = binding.inputPassword.editText?.text.toString(),
+                    onSuccess = { onSuccess() },
+                    onFailed = { onFailed() }
+                )
+        }
     }
 
     /***

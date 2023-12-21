@@ -66,7 +66,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      */
     private fun createUser() {
         if (
-            binding.suPassword.editText?.text.toString() == binding.suConfirmPassword.editText?.text.toString()
+            binding.suPassword.editText?.text.toString() == binding.suConfirmPassword.editText?.text.toString() &&
+            binding.suEmail.editText!!.text.isNotEmpty()
         ) {
             binding.progressBarSignup.isVisible = true
             AuthManager(this)

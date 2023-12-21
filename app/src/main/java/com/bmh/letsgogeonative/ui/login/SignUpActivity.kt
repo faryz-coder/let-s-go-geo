@@ -1,8 +1,11 @@
 package com.bmh.letsgogeonative.ui.login
 
 import android.content.Intent
+import android.graphics.drawable.AnimatedImageDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
@@ -18,6 +21,7 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
     TextInputLayout.OnEditTextAttachedListener {
     private lateinit var binding: SignUpBinding
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +38,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         binding.suEmail.addOnEditTextAttachedListener(this)
         binding.suPassword.addOnEditTextAttachedListener(this)
         binding.suConfirmPassword.addOnEditTextAttachedListener(this)
+
+        (binding.imageView3.drawable as AnimatedImageDrawable).start()
     }
 
     override fun onClick(btn: View) {

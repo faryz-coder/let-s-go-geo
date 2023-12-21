@@ -1,12 +1,16 @@
 package com.bmh.letsgogeonative
 
 import android.content.Intent
+import android.graphics.drawable.AnimatedImageDrawable
+import android.media.Image
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -31,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var loginViewModel: LoginViewModel
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -68,14 +73,18 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        (binding.root.findViewById<ImageView>(R.id.homeBackground).drawable as AnimatedImageDrawable).start()
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun displayProfile(email: String, name: String, image: String) {
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = email
         val imgView = binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.imageView)
         if (image.isNotEmpty()) {
             Picasso.get().load(image).into(imgView)
         }
+        (binding.navView.background as AnimatedImageDrawable).start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,8 +1,11 @@
 package com.bmh.letsgogeonative.ui.login
 
 import android.content.Intent
+import android.graphics.drawable.AnimatedImageDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isGone
@@ -28,6 +31,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
     private lateinit var binding: SignInBinding
     private var auth: FirebaseAuth = Firebase.auth
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,6 +48,8 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         // Handle Form
         binding.inputUsername.addOnEditTextAttachedListener(this)
         binding.inputPassword.addOnEditTextAttachedListener(this)
+
+        (binding.imageView2.drawable as AnimatedImageDrawable).start()
     }
 
     override fun onResume() {

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.userProfile
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -95,9 +95,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_user_info -> {
-                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.userProfile)
-            }
             R.id.action_logout -> {
                 AuthManager(this).logout()
                 val intent = Intent(this, SignInActivity::class.java)

@@ -145,6 +145,8 @@ class FirestoreManager {
         db.collection("users")
             .document(auth.currentUser?.email.toString())
             .collection("result")
+            .document(listTopicViewModel.sectionSelected)
+            .collection("list")
             .document(listTopicViewModel.topicSelected)
             .set(data)
             .addOnSuccessListener { }

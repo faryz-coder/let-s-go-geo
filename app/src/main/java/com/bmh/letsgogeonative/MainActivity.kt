@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         loginViewModel.currentUser.observe(this) {
-            Log.d("Faris", "IsUserLogin:: ${it != null}")
+            Log.d("Malar", "IsUserLogin:: ${it != null}")
             if (it == null) {
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)

@@ -63,7 +63,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
     }
 
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
-        d("Faris", "RadioButtonSelected: $p1")
+        d("Malar", "RadioButtonSelected: $p1")
         when (p1) {
             binding.answerA.id -> selectedAnswer = 0
             binding.answerB.id -> selectedAnswer = 1

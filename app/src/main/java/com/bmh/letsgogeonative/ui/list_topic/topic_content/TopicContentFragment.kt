@@ -36,7 +36,7 @@ class TopicContentFragment : Fragment() {
         binding.videoView.setMediaController(mediaController)
 
         listTopicViewModel.topicContent.observe(viewLifecycleOwner) {
-            Log.d("Faris", "topicContent:: $it , ${it.size}")
+            Log.d("Malar", "topicContent:: $it , ${it.size}")
 //            Picasso.get().load(it[0].noteUrl).into(binding.imageView3)
             binding.videoView.setVideoURI(Uri.parse(it[0].noteUrl))
             binding.videoView.start()

@@ -47,7 +47,7 @@ class ListTopicFragment : Fragment(), OnSelection {
             sections.clear()
             sections.addAll(it)
             topicAdapter.notifyDataSetChanged()
-            Log.d("Faris", "listTopicViewModel :: $it")
+            Log.d("Malar", "listTopicViewModel :: $it")
         }
 
         return root

@@ -16,7 +16,7 @@ class AuthManager(activity: Activity) {
 
     init {
         this.activity = activity
-        Log.d("Faris", "Auth Initiated")
+        Log.d("Malar", "Auth Initiated")
     }
 
     fun createUser(email: String, password: String, onSuccess: () -> Unit, onFailed: () -> Unit) {
@@ -24,13 +24,13 @@ class AuthManager(activity: Activity) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
-                    Log.d("Faris::AuthManager", "createUserWithEmail:success")
+                    Log.d("Malar::AuthManager", "createUserWithEmail:success")
                     createUserProfile(email)
                     auth.signOut()
                     onSuccess.invoke()
                 } else {
                     onFailed.invoke()
-                    Log.w("Faris::AuthManager", "createUserWithEmail:failed", task.exception)
+                    Log.w("Malar::AuthManager", "createUserWithEmail:failed", task.exception)
                 }
             }
     }
@@ -55,7 +55,7 @@ class AuthManager(activity: Activity) {
             .set(data)
             .addOnSuccessListener {}
             .addOnFailureListener {
-                Log.w("Faris", "createUserProfile:failed:", it)
+                Log.w("Malar", "createUserProfile:failed:", it)
             }
     }
 

@@ -79,7 +79,11 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.P)
     private fun displayProfile(email: String, name: String, image: String) {
-        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = email
+        if (name.isNotEmpty()) {
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = name
+        } else {
+            binding.navView.getHeaderView(0).findViewById<TextView>(R.id.userEmail).text = email
+        }
         val imgView = binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.imageView)
         if (image.isNotEmpty()) {
             Picasso.get().load(image).into(imgView)

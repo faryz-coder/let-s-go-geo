@@ -46,23 +46,23 @@ class HomeFragment : Fragment() {
         val snapHelper2 = CarouselSnapHelper()
         snapHelper2.attachToRecyclerView(binding.carouselRecyclerView2)
 
-        homeViewModel.event.observe(viewLifecycleOwner) {
-            event.clear()
-            event.addAll(it)
-            // Initiate recycler view
-            binding.carouselRecyclerView.apply {
-                layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
-                adapter = eventAdapter
-            }
-        }
-
         homeViewModel.announcement.observe(viewLifecycleOwner) {
             announcement.clear()
             announcement.addAll(it)
             // Initiate recycler view
-            binding.carouselRecyclerView2.apply {
+            binding.carouselRecyclerView.apply {
                 layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
                 adapter = announcementAdapter
+            }
+        }
+
+        homeViewModel.event.observe(viewLifecycleOwner) {
+            event.clear()
+            event.addAll(it)
+            // Initiate recycler view
+            binding.carouselRecyclerView2.apply {
+                layoutManager = CarouselLayoutManager(HeroCarouselStrategy())
+                adapter = eventAdapter
             }
         }
 

@@ -20,6 +20,7 @@
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#C3FFFFFF"
             android:hint="@string/sections"
             android:inputType="none"
             app:simpleItems="@array/sections" />

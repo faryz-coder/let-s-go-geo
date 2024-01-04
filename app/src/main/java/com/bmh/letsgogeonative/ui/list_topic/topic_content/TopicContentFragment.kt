@@ -38,6 +38,7 @@ class TopicContentFragment : Fragment() {
         listTopicViewModel.topicContent.observe(viewLifecycleOwner) {
             Log.d("Malar", "topicContent:: $it , ${it.size}")
 //            Picasso.get().load(it[0].noteUrl).into(binding.imageView3)
+            binding.topicTitle.text = it[0].title.capitalize()
             binding.videoView.setVideoURI(Uri.parse(it[0].noteUrl))
             binding.videoView.start()
         }

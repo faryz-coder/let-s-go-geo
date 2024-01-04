@@ -9,6 +9,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.getField
@@ -56,7 +57,7 @@ class FirestoreManager {
     }
 
     fun getListTopic(selection: String, listTopicViewModel: ListTopicViewModel) {
-        val docRef = db.collection(selection)
+        val docRef = db.collection(selection).orderBy("title", Query.Direction.ASCENDING)
         docRef.get()
             .addOnSuccessListener { document ->
                 val sections = mutableListOf<Sections>()

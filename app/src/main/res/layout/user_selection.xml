@@ -105,7 +105,7 @@
                 android:id="@+id/textNormal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Normal"
+                android:text="Student"
                 android:textColor="@color/ic_launcher_background"
                 android:textSize="24sp"
                 android:textStyle="bold" />

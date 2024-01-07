@@ -31,7 +31,6 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
-            style="?attr/materialCardViewFilledStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
@@ -54,7 +53,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/userAdmin"
-        style="@style/Widget.Material3.CardView.Elevated"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/userNormal"
         app:layout_constraintHorizontal_bias="0.5"
@@ -84,7 +83,6 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/userNormal"
-        style="@style/Widget.Material3.CardView.Elevated"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

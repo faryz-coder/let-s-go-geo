@@ -12,6 +12,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isNotEmpty
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import com.bmh.letsgogeonative.AdminActivity
 import com.bmh.letsgogeonative.MainActivity
 import com.bmh.letsgogeonative.R
 import com.bmh.letsgogeonative.databinding.DialogForgotPasswordBinding
@@ -30,6 +31,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
     TextInputLayout.OnEditTextAttachedListener {
     private lateinit var binding: SignInBinding
     private var auth: FirebaseAuth = Firebase.auth
+    private var isAdmin = false
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,16 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         binding = SignInBinding.inflate(layoutInflater)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
+
+        //get extra intent
+        val isAdmin = intent.getBooleanExtra("type", false)
+        this.isAdmin = isAdmin
+
+        if (isAdmin) {
+            binding.btnSignup.isVisible = false
+            binding.textView2.isVisible = false
+            binding.btnForgotPassword.isVisible = false
+        }
 
         // Handle Button Click
         binding.btnSignup.setOnClickListener(this)
@@ -112,6 +124,12 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      * True = Success
      */
     private fun initSignIn() {
+        if (isAdmin) {
+            // Navigate to admin page
+            val intent = Intent(this, AdminActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
         if (binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
             AuthManager(this)
                 .signInUser(

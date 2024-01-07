@@ -8,16 +8,16 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.bmh.letsgogeonative.databinding.UserSelectionBinding
+import com.bmh.letsgogeonative.databinding.UsersSelectionBinding
 
 class SelectionActivity: AppCompatActivity(), View.OnClickListener {
-    private lateinit var binding: UserSelectionBinding
+    private lateinit var binding: UsersSelectionBinding
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = UserSelectionBinding.inflate(layoutInflater)
+        binding = UsersSelectionBinding.inflate(layoutInflater)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
 

@@ -8,6 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.bmh.letsgogeonative.databinding.SplashScreenBinding
+import com.bmh.letsgogeonative.ui.login.SelectionActivity
 import com.bmh.letsgogeonative.ui.login.SignInActivity
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -29,7 +30,7 @@ class SplashActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             delay(3000)
-            val intent = Intent(this@SplashActivity, SignInActivity::class.java)
+            val intent = Intent(this@SplashActivity, SelectionActivity::class.java)
             startActivity(intent)
             finish()
         }

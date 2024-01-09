@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.bmh.letsgogeonative.R
 import com.bmh.letsgogeonative.databinding.FragmentAdminHomeBinding
 
 class AdminHomeFragment : Fragment(), View.OnClickListener {
@@ -34,7 +36,9 @@ class AdminHomeFragment : Fragment(), View.OnClickListener {
         when (btn.id) {
             binding.adminLogout.id -> {}
             binding.upperList.id -> {}
-            binding.upperUpload.id -> {}
+            binding.upperUpload.id -> {
+                findNavController().navigate(R.id.uploadFragment)
+            }
             binding.lowerList.id -> {}
             binding.lowerUpload.id -> {}
         }

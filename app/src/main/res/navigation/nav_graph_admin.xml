@@ -9,4 +9,9 @@
         android:name="com.bmh.letsgogeonative.ui.admin.AdminHomeFragment"
         tools:layout="@layout/fragment_admin_home"
         android:label="Admin" />
+    <fragment
+        android:id="@+id/uploadFragment"
+        android:name="com.bmh.letsgogeonative.ui.admin.uploadsScreen.UploadFragment"
+        tools:layout="@layout/fragment_upload"
+        android:label="Upload" />
 </navigation>

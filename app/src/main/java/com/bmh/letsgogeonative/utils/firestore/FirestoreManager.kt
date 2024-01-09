@@ -2,6 +2,7 @@ package com.bmh.letsgogeonative.utils.firestore
 
 import android.util.Log
 import com.bmh.letsgogeonative.model.Constant
+import com.bmh.letsgogeonative.model.Question
 import com.bmh.letsgogeonative.ui.home.HomeViewModel
 import com.bmh.letsgogeonative.ui.list_topic.Sections
 import com.bmh.letsgogeonative.ui.list_topic.ListTopicViewModel
@@ -204,15 +205,70 @@ class FirestoreManager {
                 val score = mutableListOf<Constant.Score>()
 
                 document.map {
-                    score.add(Constant.Score(
-                        it.getField<Long>("result")!!,
-                        it.getField<String>("section")!!,
-                        it.getField<String>("topic")!!,
-                        it.getField<Long>("totalQuestion")!!
+                    score.add(
+                        Constant.Score(
+                            it.getField<Long>("result")!!,
+                            it.getField<String>("section")!!,
+                            it.getField<String>("topic")!!,
+                            it.getField<Long>("totalQuestion")!!
 
-                    ))
+                        )
+                    )
                 }
                 setScore.invoke(score)
             }
+    }
+
+    fun uploadQuestion(
+        section: String,
+        title: String,
+        notes: String,
+        questions: Question.SetQuestion,
+        onSuccess: () -> Unit,
+        onFailed: () -> Unit) {
+
+        questions.questions.map {item ->
+            val question = item.question
+            val option = item.option
+            val answer = item.answer
+
+            val field = hashMapOf(
+                "notes" to notes,
+                "title" to title
+            )
+            db.collection(section).document(title)
+                .set(field)
+                .addOnSuccessListener {
+                    for (i in 0..questions.questions.indexOf(item)) {
+                        val setOption = arrayListOf(
+                            option.A, option.B, option.C, option.D
+                        )
+                        var ans = 0
+                        when (answer) {
+                            "A" -> ans = 0
+                            "B" -> ans = 1
+                            "C" -> ans = 2
+                            "D" -> ans = 3
+                        }
+
+                        val setQuestion = hashMapOf(
+                            "answer" to ans,
+                            "option" to setOption,
+                            "question" to question
+                        )
+                        db.collection(section).document(title).collection("question").document((i+1).toString())
+                            .set(setQuestion)
+                            .addOnSuccessListener {
+                                onSuccess.invoke()
+                            }
+                            .addOnFailureListener {
+                                onFailed.invoke()
+                            }
+                    }
+                }
+                .addOnFailureListener {
+                    onFailed.invoke()
+                }
+        }
     }
 }

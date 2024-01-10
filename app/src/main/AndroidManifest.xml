@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LetsGoGeoNative"
         tools:targetApi="31">
+
         <activity
-            android:name="com.bmh.letsgogeonative.SplashActivity"
+            android:name="com.bmh.letsgogeonative.StartupActivity"
             android:exported="true"
             android:theme="@style/Theme.LetsGoGeoNative.NoActionBar">
             <intent-filter>

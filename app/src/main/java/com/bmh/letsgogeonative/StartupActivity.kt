@@ -10,16 +10,15 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.bmh.letsgogeonative.databinding.SplashScreenBinding
 import com.bmh.letsgogeonative.ui.login.SelectionActivity
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SplashActivity : AppCompatActivity() {
+class StartupActivity : AppCompatActivity() {
     private lateinit var binding: SplashScreenBinding
-
-    @OptIn(DelicateCoroutinesApi::class)
+    private lateinit var job: Job
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,15 +26,23 @@ class SplashActivity : AppCompatActivity() {
         binding = SplashScreenBinding.inflate(layoutInflater)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
+
         (binding.imageView4.drawable as AnimatedImageDrawable).start()
             .let {
-                CoroutineScope(Dispatchers.Default).launch {
+                job = CoroutineScope(Dispatchers.Default).launch {
                     delay(3000)
                     withContext(Dispatchers.Main) {
                         navigateToSelection()
                     }
                 }
             }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (job.isActive) {
+            job.cancel()
+        }
     }
 
     private fun navigateToSelection() {

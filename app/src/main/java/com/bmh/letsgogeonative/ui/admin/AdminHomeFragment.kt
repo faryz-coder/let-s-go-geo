@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bmh.letsgogeonative.R
-import com.bmh.letsgogeonative.SplashActivity
+import com.bmh.letsgogeonative.StartupActivity
 import com.bmh.letsgogeonative.databinding.FragmentAdminHomeBinding
 import com.bmh.letsgogeonative.utils.auth.AuthManager
 
@@ -37,7 +37,7 @@ class AdminHomeFragment : Fragment(), View.OnClickListener {
         when (btn.id) {
             binding.adminLogout.id -> {
                 AuthManager(requireActivity()).logout()
-                val intent = Intent(requireActivity(), SplashActivity::class.java)
+                val intent = Intent(requireActivity(), StartupActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             }

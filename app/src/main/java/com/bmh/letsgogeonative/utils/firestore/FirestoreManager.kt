@@ -31,6 +31,20 @@ class FirestoreManager {
             }
     }
 
+    fun checkUserIsAdmin(email: String, onSuccess: () -> Unit, onFailed: () -> Unit) {
+        db.collection("admin")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                snapshot.map {
+                    if (it.id == email) {
+                        onSuccess.invoke()
+                        return@addOnSuccessListener
+                    }
+                }
+                onFailed.invoke()
+            }
+    }
+
     fun updateProfile(name: String) {
         val data = hashMapOf(
             "name" to name
@@ -74,7 +88,7 @@ class FirestoreManager {
             }
     }
 
-    fun removeTopic(section:String, topic: String, onSuccess: () -> Unit) {
+    fun removeTopic(section: String, topic: String, onSuccess: () -> Unit) {
         db.collection(section).document(topic)
             .delete()
             .addOnSuccessListener {
@@ -233,9 +247,10 @@ class FirestoreManager {
         notes: String,
         questions: Question.SetQuestion,
         onSuccess: () -> Unit,
-        onFailed: () -> Unit) {
+        onFailed: () -> Unit
+    ) {
 
-        questions.questions.map {item ->
+        questions.questions.map { item ->
             val question = item.question
             val option = item.option
             val answer = item.answer
@@ -264,7 +279,8 @@ class FirestoreManager {
                             "option" to setOption,
                             "question" to question
                         )
-                        db.collection(section).document(title).collection("question").document((i+1).toString())
+                        db.collection(section).document(title).collection("question")
+                            .document((i + 1).toString())
                             .set(setQuestion)
                             .addOnSuccessListener {
                                 onSuccess.invoke()

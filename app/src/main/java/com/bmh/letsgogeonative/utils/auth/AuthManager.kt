@@ -2,6 +2,7 @@ package com.bmh.letsgogeonative.utils.auth
 
 import android.app.Activity
 import android.util.Log
+import com.bmh.letsgogeonative.utils.firestore.FirestoreManager
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -40,6 +41,20 @@ class AuthManager(activity: Activity) {
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     onSuccess.invoke()
+                } else {
+                    onFailed.invoke()
+                }
+            }
+    }
+
+    fun signInAdmin(email: String, password: String, onSuccess: () -> Unit, onFailed: () -> Unit) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(activity) { task ->
+                if (task.isSuccessful) {
+                    FirestoreManager().checkUserIsAdmin(
+                        email,
+                        onSuccess = onSuccess, onFailed = onFailed
+                    )
                 } else {
                     onFailed.invoke()
                 }

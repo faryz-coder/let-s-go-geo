@@ -1,5 +1,6 @@
 package com.bmh.letsgogeonative.ui.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bmh.letsgogeonative.R
+import com.bmh.letsgogeonative.SplashActivity
 import com.bmh.letsgogeonative.databinding.FragmentAdminHomeBinding
+import com.bmh.letsgogeonative.utils.auth.AuthManager
 
 class AdminHomeFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentAdminHomeBinding? = null
@@ -33,7 +36,10 @@ class AdminHomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(btn: View) {
         when (btn.id) {
             binding.adminLogout.id -> {
-
+                AuthManager(requireActivity()).logout()
+                val intent = Intent(requireActivity(), SplashActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
             binding.upperList.id -> {
                 findNavController().navigate(R.id.adminListTopic)

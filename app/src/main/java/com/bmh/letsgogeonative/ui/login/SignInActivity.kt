@@ -68,7 +68,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         super.onResume()
         // Check If User Already Sign In
         // Navigate to Main if true
-        if (auth.currentUser != null) {
+        if (auth.currentUser != null && !isAdmin) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -124,11 +124,16 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
      * True = Success
      */
     private fun initSignIn() {
-        if (isAdmin) {
-            // Navigate to admin page
-            val intent = Intent(this, AdminActivity::class.java)
-            startActivity(intent)
-            finish()
+        if (isAdmin && binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
+            AuthManager(this).signInAdmin(email = binding.inputUsername.editText?.text.toString(),
+                password = binding.inputPassword.editText?.text.toString(),
+                onSuccess = {
+                    navigateToAdmin()
+                },
+                onFailed = {
+                    onFailed()
+                }
+            )
         }
         if (binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
             AuthManager(this)
@@ -139,6 +144,14 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
                     onFailed = { onFailed() }
                 )
         }
+    }
+
+    private fun navigateToAdmin() {
+        Snackbar.make(binding.root, "Success", Snackbar.LENGTH_SHORT).show()
+        // Navigate to admin page
+        val intent = Intent(this, AdminActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     /***

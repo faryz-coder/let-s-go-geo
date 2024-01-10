@@ -26,14 +26,13 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/materialCardView6"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#B14D4D"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -44,45 +43,22 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Logout"
+                android:textColor="@color/ic_launcher_background"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView6"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/adminLogout"
-        app:layout_constraintTop_toTopOf="@+id/adminLogout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="TextView" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
         android:id="@+id/upperList"
         style="@style/Widget.Material3.CardView.Elevated"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/adminLogout"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/upperUpload"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminLogout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -107,9 +83,12 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/upperUpload"
         style="@style/Widget.Material3.CardView.Elevated"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="150dp"
-        app:layout_constraintEnd_toEndOf="@+id/materialCardView6"
+        android:layout_marginStart="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/upperList"
         app:layout_constraintTop_toTopOf="@+id/upperList">
 
         <LinearLayout
@@ -132,79 +111,4 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Upper Level"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/adminLogout"
-        app:layout_constraintTop_toBottomOf="@+id/adminLogout" />
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Lower Level"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/upperList"
-        app:layout_constraintTop_toBottomOf="@+id/upperList" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/lowerList"
-        style="@style/Widget.Material3.CardView.Elevated"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/upperList"
-        app:layout_constraintTop_toBottomOf="@+id/textView17">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/board"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="List"
-                android:textColor="@color/ic_launcher_background"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/lowerUpload"
-        style="@style/Widget.Material3.CardView.Elevated"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/upperUpload"
-        app:layout_constraintTop_toBottomOf="@+id/textView17">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/board"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Upload Notes \n &amp; Quiz"
-                android:textColor="@color/ic_launcher_background"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

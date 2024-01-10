@@ -26,23 +26,21 @@ class AdminHomeFragment : Fragment(), View.OnClickListener {
         binding.adminLogout.setOnClickListener(this)
         binding.upperList.setOnClickListener(this)
         binding.upperUpload.setOnClickListener(this)
-        binding.lowerList.setOnClickListener(this)
-        binding.lowerUpload.setOnClickListener(this)
 
         return root
     }
 
     override fun onClick(btn: View) {
         when (btn.id) {
-            binding.adminLogout.id -> {}
+            binding.adminLogout.id -> {
+
+            }
             binding.upperList.id -> {
                 findNavController().navigate(R.id.adminListTopic)
             }
             binding.upperUpload.id -> {
                 findNavController().navigate(R.id.uploadFragment)
             }
-            binding.lowerList.id -> {}
-            binding.lowerUpload.id -> {}
         }
     }
 }

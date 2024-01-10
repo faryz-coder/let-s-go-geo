@@ -74,6 +74,14 @@ class FirestoreManager {
             }
     }
 
+    fun removeTopic(section:String, topic: String, onSuccess: () -> Unit) {
+        db.collection(section).document(topic)
+            .delete()
+            .addOnSuccessListener {
+                onSuccess.invoke()
+            }
+    }
+
     fun getTopicContent(listTopicViewModel: ListTopicViewModel) {
         val docRef = db.collection(listTopicViewModel.sectionSelected)
             .document(listTopicViewModel.topicSelected)

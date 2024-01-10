@@ -35,7 +35,9 @@ class AdminHomeFragment : Fragment(), View.OnClickListener {
     override fun onClick(btn: View) {
         when (btn.id) {
             binding.adminLogout.id -> {}
-            binding.upperList.id -> {}
+            binding.upperList.id -> {
+                findNavController().navigate(R.id.adminListTopic)
+            }
             binding.upperUpload.id -> {
                 findNavController().navigate(R.id.uploadFragment)
             }

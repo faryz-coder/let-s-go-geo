@@ -249,7 +249,7 @@ class FirestoreManager {
         onSuccess: () -> Unit,
         onFailed: () -> Unit
     ) {
-
+        var i = 0
         questions.questions.map { item ->
             val question = item.question
             val option = item.option
@@ -262,33 +262,44 @@ class FirestoreManager {
             db.collection(section).document(title)
                 .set(field)
                 .addOnSuccessListener {
-                    for (i in 0..questions.questions.indexOf(item)) {
-                        val setOption = arrayListOf(
-                            option.A, option.B, option.C, option.D
-                        )
-                        var ans = 0
-                        when (answer) {
-                            "A" -> ans = 0
-                            "B" -> ans = 1
-                            "C" -> ans = 2
-                            "D" -> ans = 3
+                    val setOption = arrayListOf(
+                        option.A, option.B, option.C, option.D
+                    )
+                    var ans = 0
+
+                    when (answer) {
+                        "A" -> {
+                            ans = 0
                         }
 
-                        val setQuestion = hashMapOf(
-                            "answer" to ans,
-                            "option" to setOption,
-                            "question" to question
-                        )
-                        db.collection(section).document(title).collection("question")
-                            .document((i + 1).toString())
-                            .set(setQuestion)
-                            .addOnSuccessListener {
-                                onSuccess.invoke()
-                            }
-                            .addOnFailureListener {
-                                onFailed.invoke()
-                            }
+                        "B" -> {
+                            ans = 1
+                        }
+
+                        "C" -> {
+                            ans = 2
+                        }
+
+                        "D" -> {
+                            ans = 3
+                        }
                     }
+
+                    val setQuestion = hashMapOf(
+                        "answer" to ans,
+                        "option" to setOption,
+                        "question" to question
+                    )
+                    db.collection(section).document(title).collection("question")
+                        .document((i + 1).toString())
+                        .set(setQuestion)
+                        .addOnSuccessListener {
+                            onSuccess.invoke()
+                        }
+                        .addOnFailureListener {
+                            onFailed.invoke()
+                        }
+                    i += 1
                 }
                 .addOnFailureListener {
                     onFailed.invoke()

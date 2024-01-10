@@ -9,11 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.bmh.letsgogeonative.databinding.SplashScreenBinding
 import com.bmh.letsgogeonative.ui.login.SelectionActivity
-import com.bmh.letsgogeonative.ui.login.SignInActivity
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: SplashScreenBinding
@@ -27,12 +28,19 @@ class SplashActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(binding.root)
         (binding.imageView4.drawable as AnimatedImageDrawable).start()
+            .let {
+                CoroutineScope(Dispatchers.Default).launch {
+                    delay(3000)
+                    withContext(Dispatchers.Main) {
+                        navigateToSelection()
+                    }
+                }
+            }
+    }
 
-        GlobalScope.launch {
-            delay(3000)
-            val intent = Intent(this@SplashActivity, SelectionActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+    private fun navigateToSelection() {
+        val intent = Intent(this, SelectionActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -25,7 +25,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import kotlinx.coroutines.runBlocking
 
 class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface,
     TextInputLayout.OnEditTextAttachedListener {
@@ -44,6 +43,12 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
         //get extra intent
         val isAdmin = intent.getBooleanExtra("type", false)
         this.isAdmin = isAdmin
+
+        if (auth.currentUser != null && !isAdmin) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         if (isAdmin) {
             binding.btnSignup.isVisible = false
@@ -66,13 +71,6 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
 
     override fun onResume() {
         super.onResume()
-        // Check If User Already Sign In
-        // Navigate to Main if true
-        if (auth.currentUser != null && !isAdmin) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
     }
 
     override fun onClick(btn: View) {
@@ -135,7 +133,7 @@ class SignInActivity : AppCompatActivity(), View.OnClickListener, UtilsInterface
                 }
             )
         }
-        if (binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
+        else if (binding.inputUsername.editText!!.text.isNotEmpty() && binding.inputPassword.editText!!.text.isNotEmpty()) {
             AuthManager(this)
                 .signInUser(
                     email = binding.inputUsername.editText?.text.toString(),

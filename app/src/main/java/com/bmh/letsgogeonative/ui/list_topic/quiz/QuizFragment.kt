@@ -104,11 +104,17 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
             d("QuizFragment", "Correct")
             listTopicViewModel.marks += 1
             showChoiceResult(true)
-            proceed()
+            lifecycleScope.launch {
+                delay(2000L)
+                proceed()
+            }
         } else {
             d("QuizFragment", "Wrong")
             showChoiceResult(false)
-            proceed()
+            lifecycleScope.launch {
+                delay(2000L)
+                proceed()
+            }
         }
     }
 
@@ -118,7 +124,7 @@ class QuizFragment : Fragment(), RadioGroup.OnCheckedChangeListener, View.OnClic
             d("QuizFragment", "Complete")
             FirestoreManager().submitResult(listTopicViewModel)
             lifecycleScope.launch {
-                delay(1000L)
+                delay(2000L)
                 findNavController().popBackStack(R.id.nav_gallery, false)
             }
         } else {
